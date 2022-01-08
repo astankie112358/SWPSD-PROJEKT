@@ -1,0 +1,25 @@
+﻿<Page x:Class="SWPSD_PROJEKT.Book_Properties"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SWPSD_PROJEKT"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Book_Properties">
+
+    <Grid>
+        <Button x:Name="backbutton" Content="Wróć" HorizontalAlignment="Left" Margin="571,310,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="82" Width="139" Click="backbutton_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.26"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox x:Name="booktitle" HorizontalAlignment="Left" Margin="165,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270"/>
+
+    </Grid>
+</Page>
