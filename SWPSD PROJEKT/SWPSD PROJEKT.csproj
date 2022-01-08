@@ -149,6 +149,11 @@
     <Compile Include="Book_Properties.xaml.cs">
       <DependentUpon>Book_Properties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="data_for_db.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>data_for_db.tt</DependentUpon>
+    </Compile>
     <Compile Include="MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
@@ -183,6 +188,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data_for_db.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>data_for_db.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

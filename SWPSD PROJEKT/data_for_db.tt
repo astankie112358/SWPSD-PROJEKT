@@ -1,0 +1,46 @@
+﻿insert into biblioteka.autor
+values(1,"Henryk", "Sienkiewicz");
+insert into biblioteka.autor
+values(2,"Adam", "Mickiewicz");
+insert into biblioteka.autor
+values(3,"John", "Tolkien");
+insert into biblioteka.gatunek
+values(1,"Fantasy");
+insert into biblioteka.gatunek
+values(2,"Historyczne");
+insert into biblioteka.gatunek
+values(3,"Zagraniczne");
+insert into biblioteka.gatunek
+values(4,"Przygodowe");
+insert into biblioteka.ksiazka
+values(1,"Ogniem i mieczem",1);
+insert into biblioteka.ksiazka
+values(2,"Pan Tadeusz",2);
+insert into biblioteka.ksiazka
+values(3,"Władca Pierścieni - Drużyna",3);
+insert into biblioteka.ksiazka
+values(4,"Władca Pierścieni - Dwie wieże",3);
+insert into biblioteka.ksiazka
+values(5,"Władca Pierścieni - Powrót króla",3);
+insert into biblioteka.ksiazka_gatunek
+values(1,1,2);
+insert into biblioteka.ksiazka_gatunek
+values(2,2,2);
+insert into biblioteka.ksiazka_gatunek
+values(3,3,1);
+insert into biblioteka.ksiazka_gatunek
+values(4,3,3);
+insert into biblioteka.ksiazka_gatunek
+values(5,3,4);
+insert into biblioteka.ksiazka_gatunek
+values(6,4,1);
+insert into biblioteka.ksiazka_gatunek
+values(7,4,3);
+insert into biblioteka.ksiazka_gatunek
+values(8,4,4);
+insert into biblioteka.ksiazka_gatunek
+values(9,5,1);
+insert into biblioteka.ksiazka_gatunek
+values(10,5,3);
+insert into biblioteka.ksiazka_gatunek
+values(11,5,4);
