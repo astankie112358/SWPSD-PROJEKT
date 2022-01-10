@@ -20,6 +20,7 @@
                     <GridViewColumn Header="Tytuł" DisplayMemberBinding="{Binding title}"/>
                     <GridViewColumn Header="Autor" DisplayMemberBinding="{Binding author}"/>
                     <GridViewColumn Header="Gatunki" DisplayMemberBinding="{Binding typesview}"/>
+                    <GridViewColumn Header="Dostępna" DisplayMemberBinding="{Binding free}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -28,6 +29,8 @@
         <Button x:Name="downscroll" Content="Dół" HorizontalAlignment="Left" Margin="652,211,0,0" VerticalAlignment="Top" Width="30" Click="downscroll_Click"/>
         <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="652,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="40" TextChanged="searchbar_TextChanged"/>
         <Button x:Name="go_into_details" Content="Wybierz" HorizontalAlignment="Left" Margin="644,261,0,0" VerticalAlignment="Top" Width="136" Height="46" Click="go_into_details_Click" />
+        <Button Content="Akceptuj wypożyczenia" HorizontalAlignment="Left" Margin="97,384,0,0" VerticalAlignment="Top" Height="56" Width="133" Click="Button_Click"/>
+        <TextBlock x:Name="nobooks" HorizontalAlignment="Left" Margin="275,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="204"><Run Language="pl-pl" Text="Nie dodałeś żadnych książek"/></TextBlock>
 
     </Grid>
 </Page>

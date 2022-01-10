@@ -28,22 +28,36 @@ namespace SWPSD_PROJEKT
         public List<Book> books = new List<Book>();
         public static SpeechSynthesizer pTTS = new SpeechSynthesizer();
         public static SpeechRecognitionEngine pSRE;
-        public BooksWindowPage()
+        public List<Book> bookstoborrow;
+        int idclient;
+        public BooksWindowPage(List<Book> bookstoborrow, int idclient)
         {
             conn = new DBConnection();
-            InitializeComponent();
+            this.idclient= idclient;
             
+            InitializeComponent();
+            this.nobooks.Visibility = System.Windows.Visibility.Hidden;
+            if (bookstoborrow != null)
+                this.bookstoborrow = bookstoborrow;
+            else
+                this.bookstoborrow=new List<Book>();
             this.conn.IsConnect();
-            string query = "select ks.idksiazka, ks.tytul, gt.nazwa, concat(aut.imie, \" \", aut.nazwisko) from biblioteka.ksiazka as ks inner join biblioteka.autor as aut on aut.idautor = ks.autor inner join biblioteka.ksiazka_gatunek kg on kg.id_ksiazka = ks.idksiazka inner join biblioteka.gatunek as gt on gt.idgatunek = kg.id_gatunek order by id_ksiazka";
+            string query = "select ks.idksiazka, ks.tytul, gt.nazwa, concat(aut.imie, \" \", aut.nazwisko), ks.wolna from biblioteka.ksiazka as ks inner join biblioteka.autor as aut on aut.idautor = ks.autor inner join biblioteka.ksiazka_gatunek kg on kg.id_ksiazka = ks.idksiazka inner join biblioteka.gatunek as gt on gt.idgatunek = kg.id_gatunek order by id_ksiazka";
             var cmd = new MySqlCommand(query, conn.Connection);
             var reader=cmd.ExecuteReader();
-            selection_box.Items.Add("Tytuly");
+            selection_box.Items.Add("Tytuły");
             selection_box.Items.Add("Autorzy");
             selection_box.Items.Add("Gatunki");
             selection_box.SelectedIndex = 0;
                         while (reader.Read())
             {
-                Book book = new Book(Int32.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(3), null);
+                int isfree = Int32.Parse(reader.GetString(4));
+                bool free=false;
+                    if (isfree > 0)
+                {
+                    free=true;
+                }
+                Book book = new Book(Int32.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(3), null, free);
                 bool exist = false;
                 foreach(Book booksearch in books)
                 {
@@ -70,6 +84,7 @@ namespace SWPSD_PROJEKT
                 booklist.Items.Add(book);
             }
             booklist.SelectedIndex = 0;
+
             buildgrammar();
         }
 
@@ -83,12 +98,12 @@ namespace SWPSD_PROJEKT
 
         }
 
-        private void selection_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void changesort()
         {
-            if (selection_box.SelectedValue.ToString() == "Tytuly")
+            if (selection_box.SelectedValue.ToString() == "Tytuły")
             {
                 booklist.Items.Clear();
-                books=books.OrderBy(o=>o.title).ToList();
+                books = books.OrderBy(o => o.title).ToList();
                 foreach (Book book in books)
                 {
                     booklist.Items.Add(book);
@@ -120,6 +135,11 @@ namespace SWPSD_PROJEKT
                 }
             }
         }
+
+        private void selection_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            changesort();
+        }
         private void scrollup()
         {
             if (booklist.SelectedIndex > 0)
@@ -142,7 +162,7 @@ namespace SWPSD_PROJEKT
 
         public bool comparetext(Book book)
         {
-            if(selection_box.SelectedValue.ToString() == "Tytuly")
+            if(selection_box.SelectedValue.ToString() == "Tytuły")
             {
                 if (book.title.IndexOf(searchbar.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                     return true;
@@ -182,7 +202,7 @@ namespace SWPSD_PROJEKT
         }
         private void go_into_book_details()
         {
-            this.NavigationService.Navigate(new Book_Properties(booklist.SelectedItem as Book));
+            this.NavigationService.Navigate(new Book_Properties(booklist.SelectedItem as Book, this.bookstoborrow,this.idclient));
         }
 
         private void go_into_details_Click(object sender, RoutedEventArgs e)
@@ -206,7 +226,8 @@ namespace SWPSD_PROJEKT
                 choice1.Add("Wybierz");
                 choice1.Add("Góra");
                 choice1.Add("Dół");
-                choice1.Add("Wyszukaj");
+                choice1.Add("Usuń");
+                choice1.Add("Wróć");
                 buildGrammarSystem.Append(choice1);
                 Grammar basic = new Grammar(buildGrammarSystem);
                 pSRE.LoadGrammarAsync(basic);
@@ -224,6 +245,28 @@ namespace SWPSD_PROJEKT
                 Grammar selectbook = new Grammar(buildGrammarSystem1);
                 pSRE.LoadGrammarAsync(selectbook);
 
+                GrammarBuilder buildGrammarSystem2 = new GrammarBuilder();
+                Choices choice5 = new Choices();
+                choice5.Add("Wyszukaj");
+                string[] letters = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "y","w","z","ż","ź" };
+                Choices choice6 = new Choices();
+                choice6.Add(letters);
+                buildGrammarSystem2.Append(choice5);
+                buildGrammarSystem2.Append(choice6);
+                Grammar search = new Grammar(buildGrammarSystem2);
+                pSRE.LoadGrammarAsync(search);
+
+                GrammarBuilder buildGrammarSystem3 = new GrammarBuilder();
+                Choices choice7 = new Choices();
+                choice7.Add("Sortuj po");
+                buildGrammarSystem3.Append(choice7);
+                Choices choice8 = new Choices();
+                choice8.Add("Tytuły");
+                choice8.Add("Autorzy");
+                choice8.Add("Gatunki");
+                buildGrammarSystem3.Append(choice8);
+                Grammar sortby = new Grammar(buildGrammarSystem3);
+                pSRE.LoadGrammarAsync(sortby);
                 pSRE.RecognizeAsync(RecognizeMode.Multiple);
             }
             catch (Exception ex)
@@ -253,7 +296,21 @@ namespace SWPSD_PROJEKT
                 }
                 else if(txt.IndexOf("Wyszukaj") >= 0)
                 {
-                    Console.WriteLine(" ");
+                    string letter = txt.Substring(9);
+                    this.searchbar.Text = this.searchbar.Text+letter;
+                }
+                else if (txt.IndexOf("Usuń") >= 0)
+                { 
+                    if(this.searchbar.Text.Length>0)
+                    this.searchbar.Text = this.searchbar.Text.Remove(this.searchbar.Text.Length - 1,1);
+                }
+                else if (txt.IndexOf("Wróć") >= 0)
+                {
+                    this.NavigationService.GoBack();
+                }
+                else if (txt.IndexOf("Sortuj po") >= 0)
+                {
+                    this.selection_box.SelectedValue = txt.Substring(10);
                 }
                 else if (txt.IndexOf("Wskaż") >= 0)
                 {
@@ -271,6 +328,14 @@ namespace SWPSD_PROJEKT
 
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.bookstoborrow.Count > 0)
+            this.NavigationService.Navigate(new Complete_Borrow(idclient,bookstoborrow));
+            else
+                this.nobooks.Visibility = System.Windows.Visibility.Visible;
         }
     }
 

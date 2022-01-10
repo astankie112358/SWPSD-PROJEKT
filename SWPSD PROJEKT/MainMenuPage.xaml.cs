@@ -25,7 +25,7 @@ namespace SWPSD_PROJEKT
     /// </summary>
     public partial class MainMenuPage : Page
     {
-        DBConnection conn;
+        DBConnection conn=new DBConnection();
         public static SpeechSynthesizer pTTS = new SpeechSynthesizer();
         public static SpeechRecognitionEngine pSRE;
         public MainMenuPage()
@@ -35,11 +35,48 @@ namespace SWPSD_PROJEKT
         }
         public void navigatetobooksview()
         {
-            this.NavigationService.Navigate(new BooksWindowPage());
+
+            this.conn.IsConnect();
+            if (getuserid.Text != "")
+            {
+                string query = "select * from biblioteka.czytelnik where idczytelnik = " + getuserid.Text;
+                var cmd = new MySqlCommand(query, conn.Connection);
+                var reader = cmd.ExecuteReader();
+                int userid;
+
+
+                if (reader.HasRows)
+                {
+                    userid = Int32.Parse(getuserid.Text);
+                    this.NavigationService.Navigate(new BooksWindowPage(null, userid));
+                }
+                reader.Close();
+            }
+        }
+
+        public void navigatetoorders()
+        {
+            this.conn.IsConnect();
+            if (getuserid.Text != "")
+            {
+                string query = "select * from biblioteka.czytelnik where idczytelnik = " + getuserid.Text;
+                var cmd = new MySqlCommand(query, conn.Connection);
+                var reader = cmd.ExecuteReader();
+                int userid;
+
+
+                if (reader.HasRows)
+                {
+                    userid = Int32.Parse(getuserid.Text);
+                    this.NavigationService.Navigate(new Orders(userid));
+                }
+                reader.Close();
+            }
         }
 
         private void showbooksbutton_Click(object sender, RoutedEventArgs e)
         {
+            
             navigatetobooksview();
         }
         public void buildgrammar()
@@ -59,6 +96,9 @@ namespace SWPSD_PROJEKT
                 Choices choice = new Choices();
                 choice.Add("Wypożycz książkę");
                 choice.Add("Zwróć książkę");
+                string[] numbers = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+                choice.Add(numbers);
+                choice.Add("Usuń");
                 buildGrammarSystem.Append(choice);
                 Grammar calc = new Grammar(buildGrammarSystem);
                 pSRE.LoadGrammarAsync(calc);
@@ -86,10 +126,25 @@ namespace SWPSD_PROJEKT
                     Console.WriteLine("");
 
                 }
+                else if (txt.IndexOf("Usuń") >= 0)
+                {
+                    if(getuserid.Text.Length>0)
+                    getuserid.Text = getuserid.Text.Remove(getuserid.Text.Length - 1,1);
+
+                }
+                else
+                {
+                    getuserid.Text= getuserid.Text+txt;
+                }
 
 
             }
 
+        }
+
+        private void borrows_button_Click(object sender, RoutedEventArgs e)
+        {
+            navigatetoorders();
         }
     }
 }

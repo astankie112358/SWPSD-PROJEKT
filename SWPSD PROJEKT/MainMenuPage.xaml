@@ -10,7 +10,9 @@
 
     <Grid>
         <Button x:Name="showbooksbutton" Content="Pokaż książki" HorizontalAlignment="Left" Margin="71,252,0,0" VerticalAlignment="Top" Height="103" Width="206" Click="showbooksbutton_Click"/>
-        <Button x:Name="showbooksbutton_Copy" Content="Oddaj książkę" HorizontalAlignment="Left" Margin="484,252,0,0" VerticalAlignment="Top" Height="103" Width="206"/>
+        <Button x:Name="borrows_button" Content="Oddaj książkę" HorizontalAlignment="Left" Margin="484,252,0,0" VerticalAlignment="Top" Height="103" Width="206" Click="borrows_button_Click" />
+        <TextBox x:Name="getuserid" HorizontalAlignment="Left" Margin="231,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="108,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="87"><Run Language="pl-pl" Text="Podaj swoje id"/></TextBlock>
 
     </Grid>
 </Page>

@@ -26,7 +26,6 @@ namespace SWPSD_PROJEKT
             InitializeComponent(); 
             PageFrame.Navigate(new MainMenuPage());
             conn = new DBConnection();
-            Console.WriteLine("aaa");
 
         }
         

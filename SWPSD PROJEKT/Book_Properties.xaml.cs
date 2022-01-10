@@ -21,16 +21,32 @@ namespace SWPSD_PROJEKT
     public partial class Book_Properties : Page
     {
         Book book;
-        public Book_Properties(Book book)
+        List<Book> bookstoborrow;
+        int clientid;
+        public Book_Properties(Book book, List<Book> bookstoborrow, int clientid)
         {
             InitializeComponent();
                this.book = book;
             booktitle.Text = this.book.title;
+            this.bookstoborrow= bookstoborrow;
+            this.clientid = clientid;
+            this.cantadd.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void backbutton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void getbookbutton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((Book)bookstoborrow.Find(item => item.title == book.title) == null && book.free == true)
+            {
+                bookstoborrow.Add(this.book);
+                this.NavigationService.Navigate(new BooksWindowPage(bookstoborrow, clientid));
+            }
+            else
+                this.cantadd.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }

@@ -20,6 +20,18 @@
             </Button.RenderTransform>
         </Button>
         <TextBox x:Name="booktitle" HorizontalAlignment="Left" Margin="165,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270"/>
+        <Button x:Name="getbookbutton" Content="Wypożycz" HorizontalAlignment="Left" Margin="117,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="82" Width="139" Click="getbookbutton_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.26"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox x:Name="descriptiontext" HorizontalAlignment="Left" Margin="165,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="371" Height="136"/>
+        <TextBlock x:Name="cantadd" HorizontalAlignment="Left" Margin="165,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352"><Run Language="pl-pl" Text="Nie można dodać książki"/></TextBlock>
 
     </Grid>
 </Page>

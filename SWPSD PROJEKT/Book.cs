@@ -14,13 +14,17 @@ namespace SWPSD_PROJEKT
         public List<string> types = new List<string>();
         public string typesview { get; set; }
         public string description { get; set; }
-        public Book(int id, string name, string author, string description)
+
+        public bool free { get; set; }
+        public Book(int id, string name, string author, string description, bool free)
         {
             this.id = id;
             this.title = name;
             this.author = author;
             this.description = description;
             typesview = " ";
+            this.free = free;
+
         }
 
     }
