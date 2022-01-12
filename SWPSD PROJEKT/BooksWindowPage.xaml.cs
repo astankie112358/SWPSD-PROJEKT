@@ -26,8 +26,9 @@ namespace SWPSD_PROJEKT
     {
         DBConnection conn;
         public List<Book> books = new List<Book>();
-        public static SpeechSynthesizer pTTS = new SpeechSynthesizer();
-        public static SpeechRecognitionEngine pSRE;
+        public SpeechSynthesizer pTTS = new SpeechSynthesizer();
+        public SpeechRecognitionEngine pSRE = new SpeechRecognitionEngine();
+
         public List<Book> bookstoborrow;
         int idclient;
         public BooksWindowPage(List<Book> bookstoborrow, int idclient)
@@ -90,12 +91,8 @@ namespace SWPSD_PROJEKT
 
         private void mainmenubutton_Click(object sender, RoutedEventArgs e)
         {
+            pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
             this.NavigationService.Navigate(new MainMenuPage());
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void changesort()
@@ -187,6 +184,7 @@ namespace SWPSD_PROJEKT
                 }
                 return false;
             }
+            booklist.SelectedIndex = 0;
 
         }
         private void searchbar_TextChanged(object sender, TextChangedEventArgs e)
@@ -202,12 +200,14 @@ namespace SWPSD_PROJEKT
         }
         private void go_into_book_details()
         {
+            pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
             this.NavigationService.Navigate(new Book_Properties(booklist.SelectedItem as Book, this.bookstoborrow,this.idclient));
         }
 
         private void go_into_details_Click(object sender, RoutedEventArgs e)
         {
-            go_into_book_details();
+                
+               go_into_book_details();
         }
 
         public void buildgrammar()
@@ -228,6 +228,7 @@ namespace SWPSD_PROJEKT
                 choice1.Add("Dół");
                 choice1.Add("Usuń");
                 choice1.Add("Wróć");
+                choice1.Add("Akceptuj");
                 buildGrammarSystem.Append(choice1);
                 Grammar basic = new Grammar(buildGrammarSystem);
                 pSRE.LoadGrammarAsync(basic);
@@ -306,11 +307,22 @@ namespace SWPSD_PROJEKT
                 }
                 else if (txt.IndexOf("Wróć") >= 0)
                 {
-                    this.NavigationService.GoBack();
+                    pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
+                    this.NavigationService.Navigate(new MainMenuPage());
                 }
                 else if (txt.IndexOf("Sortuj po") >= 0)
                 {
                     this.selection_box.SelectedValue = txt.Substring(10);
+                }
+                else if (txt.IndexOf("Akceptuj") >= 0)
+                {
+                    if (this.bookstoborrow.Count > 0)
+                    {
+                        pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
+                        this.NavigationService.Navigate(new Complete_Borrow(idclient, bookstoborrow));
+                    }
+                    else
+                        this.nobooks.Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (txt.IndexOf("Wskaż") >= 0)
                 {
@@ -333,7 +345,10 @@ namespace SWPSD_PROJEKT
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (this.bookstoborrow.Count > 0)
-            this.NavigationService.Navigate(new Complete_Borrow(idclient,bookstoborrow));
+            {
+                pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
+                this.NavigationService.Navigate(new Complete_Borrow(idclient, bookstoborrow));
+            }
             else
                 this.nobooks.Visibility = System.Windows.Visibility.Visible;
         }

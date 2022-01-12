@@ -14,7 +14,7 @@
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="mainmenubutton" Content="Wróć&#xD;&#xA;do menu" HorizontalAlignment="Left" Margin="665,333,0,0" VerticalAlignment="Top" Height="46" Width="73" Click="mainmenubutton_Click"/>
-        <ListView x:Name="booklist" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,172,71" SelectionChanged="ListView_SelectionChanged">
+        <ListView x:Name="booklist" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,172,71">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Tytuł" DisplayMemberBinding="{Binding title}"/>

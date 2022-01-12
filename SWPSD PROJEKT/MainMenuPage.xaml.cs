@@ -20,17 +20,16 @@ using System.Globalization;
 
 namespace SWPSD_PROJEKT
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainMenuPage.xaml
-    /// </summary>
+
     public partial class MainMenuPage : Page
     {
         DBConnection conn=new DBConnection();
-        public static SpeechSynthesizer pTTS = new SpeechSynthesizer();
-        public static SpeechRecognitionEngine pSRE;
+        public SpeechSynthesizer pTTS = new SpeechSynthesizer();
+        public SpeechRecognitionEngine pSRE = new SpeechRecognitionEngine();
         public MainMenuPage()
         {
             InitializeComponent();
+            
             buildgrammar();
         }
         public void navigatetobooksview()
@@ -48,12 +47,12 @@ namespace SWPSD_PROJEKT
                 if (reader.HasRows)
                 {
                     userid = Int32.Parse(getuserid.Text);
+                    pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
                     this.NavigationService.Navigate(new BooksWindowPage(null, userid));
                 }
                 reader.Close();
             }
         }
-
         public void navigatetoorders()
         {
             this.conn.IsConnect();
@@ -67,6 +66,7 @@ namespace SWPSD_PROJEKT
 
                 if (reader.HasRows)
                 {
+                    pSRE.SpeechRecognized -= PSRE_SpeechRecognized;
                     userid = Int32.Parse(getuserid.Text);
                     this.NavigationService.Navigate(new Orders(userid));
                 }
@@ -123,8 +123,7 @@ namespace SWPSD_PROJEKT
                 }
                 else if (txt.IndexOf("Zwróć książkę") >= 0)
                 {
-                    Console.WriteLine("");
-
+                    navigatetoorders();
                 }
                 else if (txt.IndexOf("Usuń") >= 0)
                 {
