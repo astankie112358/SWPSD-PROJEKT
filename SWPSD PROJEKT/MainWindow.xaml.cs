@@ -39,7 +39,7 @@ namespace SWPSD_PROJEKT
             server = "127.0.0.1";
             databaseName = "biblioteka";
             userName = "root";
-            password = "nuka2008";
+            password = "admin";
             port = "3306";
         }
 

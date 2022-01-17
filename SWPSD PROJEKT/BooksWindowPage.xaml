@@ -13,7 +13,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="mainmenubutton" Content="Wróć&#xD;&#xA;do menu" HorizontalAlignment="Left" Margin="665,333,0,0" VerticalAlignment="Top" Height="46" Width="73" Click="mainmenubutton_Click"/>
+        <Button x:Name="mainmenubutton" Content="Wróć&#xD;&#xA;do menu" HorizontalAlignment="Left" Margin="36,385,0,0" VerticalAlignment="Top" Height="46" Width="73" Click="mainmenubutton_Click"/>
         <ListView x:Name="booklist" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,172,71">
             <ListView.View>
                 <GridView>
@@ -24,13 +24,18 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="selection_box" HorizontalAlignment="Left" Margin="652,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="selection_box_SelectionChanged"/>
-        <Button x:Name="upscroll" Content="Góra" HorizontalAlignment="Left" Margin="652,172,0,0" VerticalAlignment="Top" Click="upscroll_Click"/>
-        <Button x:Name="downscroll" Content="Dół" HorizontalAlignment="Left" Margin="652,211,0,0" VerticalAlignment="Top" Width="30" Click="downscroll_Click"/>
-        <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="652,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="40" TextChanged="searchbar_TextChanged"/>
-        <Button x:Name="go_into_details" Content="Wybierz" HorizontalAlignment="Left" Margin="644,261,0,0" VerticalAlignment="Top" Width="136" Height="46" Click="go_into_details_Click" />
-        <Button Content="Akceptuj wypożyczenia" HorizontalAlignment="Left" Margin="97,384,0,0" VerticalAlignment="Top" Height="56" Width="133" Click="Button_Click"/>
+        <ComboBox x:Name="selection_box" HorizontalAlignment="Left" Margin="660,78,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="selection_box_SelectionChanged"/>
+        <Button x:Name="upscroll" Content="Góra" HorizontalAlignment="Left" Margin="618,35,0,0" VerticalAlignment="Top" Click="upscroll_Click"/>
+        <Button x:Name="downscroll" Content="Dół" HorizontalAlignment="Left" Margin="617,81,0,0" VerticalAlignment="Top" Width="30" Click="downscroll_Click"/>
+        <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="660,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="40" TextChanged="searchbar_TextChanged"/>
+        <Button x:Name="go_into_details" Content="Wybierz" HorizontalAlignment="Left" Margin="644,285,0,0" VerticalAlignment="Top" Width="136" Height="46" Click="go_into_details_Click" />
+        <Button Content="Akceptuj wypożyczenia" HorizontalAlignment="Left" Margin="644,372,0,0" VerticalAlignment="Top" Height="56" Width="133" Click="Button_Click"/>
         <TextBlock x:Name="nobooks" HorizontalAlignment="Left" Margin="275,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="204"><Run Language="pl-pl" Text="Nie dodałeś żadnych książek"/></TextBlock>
+        <Label HorizontalAlignment="Left" Margin="618,144,0,0" VerticalAlignment="Top" Width="172" Height="102">
+            <TextBlock Height="92" Width="172">
+                Dostępne komendy:<LineBreak/>-teksty z przycisków<LineBreak/>-usuń<LineBreak/>-wyszukaj<LineBreak/>-Sortuj po *nazwa kolumny*
+            </TextBlock>
+        </Label>
 
     </Grid>
 </Page>

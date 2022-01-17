@@ -21,6 +21,12 @@
             </ListView.View>
         </ListView>
         <ComboBox x:Name="whichtoshow" HorizontalAlignment="Left" Margin="637,32,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="whichtoshow_SelectionChanged"/>
+        
+        <Label HorizontalAlignment="Left" Margin="654,306,0,0" VerticalAlignment="Top" Height="106" Width="136">
+            <TextBlock Height="96" Width="107">
+                 Dostępne komendy:<LineBreak/>-zwróć książkę<LineBreak/>-wróć<LineBreak/>-góra/dół<LineBreak/>-pokaż oddane<LineBreak/>-pokaż nieoddane
+            </TextBlock>
+        </Label>
 
     </Grid>
 </Page>

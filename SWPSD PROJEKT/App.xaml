@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:SWPSD_PROJEKT"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>

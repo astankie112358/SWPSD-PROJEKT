@@ -32,6 +32,11 @@
         </Button>
         <TextBox x:Name="descriptiontext" HorizontalAlignment="Left" Margin="165,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="371" Height="136"/>
         <TextBlock x:Name="cantadd" HorizontalAlignment="Left" Margin="165,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352"><Run Language="pl-pl" Text="Nie można dodać książki"/></TextBlock>
+        <Label HorizontalAlignment="Left" Margin="617,125,0,0" VerticalAlignment="Top" Width="129" Height="61">
+            <TextBlock Height="51">
+                Dostępne komendy: <LineBreak/>-Wypożycz<LineBreak/>-Wróć
+            </TextBlock>
+        </Label>
 
     </Grid>
 </Page>

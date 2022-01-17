@@ -9,6 +9,7 @@
       Title="Complete_Borrow">
 
     <Grid HorizontalAlignment="Left" Width="800">
+
         <ListView x:Name="booksinorder" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,169,98">
             <ListView.View>
                 <GridView>
@@ -20,6 +21,12 @@
         </ListView>
         <Button x:Name="completeborrow" Content="Wypożycz" HorizontalAlignment="Left" Margin="675,143,0,0" VerticalAlignment="Top" Width="67" Click="completeborrow_Click"/>
         <Button x:Name="backbutton" Content="Wróć" HorizontalAlignment="Left" Margin="675,0,0,0" VerticalAlignment="Center" Width="67" Click="backbutton_Click"/>
+        
+        <Label HorizontalAlignment="Left" Margin="675,44,0,0" VerticalAlignment="Top" Width="115" Height="74">
+            <TextBlock Height="64" >
+                Dostępne komendy:<LineBreak/>-wypożycz<LineBreak/>-wróć
+            </TextBlock>
+        </Label>
 
     </Grid>
 </Page>

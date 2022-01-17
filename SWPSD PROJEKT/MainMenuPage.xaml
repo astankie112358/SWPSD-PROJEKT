@@ -8,11 +8,14 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainMenuPage">
 
+
+
     <Grid>
-        <Button x:Name="showbooksbutton" Content="Pokaż książki" HorizontalAlignment="Left" Margin="71,252,0,0" VerticalAlignment="Top" Height="103" Width="206" Click="showbooksbutton_Click"/>
-        <Button x:Name="borrows_button" Content="Oddaj książkę" HorizontalAlignment="Left" Margin="484,252,0,0" VerticalAlignment="Top" Height="103" Width="206" Click="borrows_button_Click" />
-        <TextBox x:Name="getuserid" HorizontalAlignment="Left" Margin="231,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="108,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="87"><Run Language="pl-pl" Text="Podaj swoje id"/></TextBlock>
+        <Button x:Name="showbooksbutton" Content="Wypożycz książkę" HorizontalAlignment="Left" Margin="71,252,0,0" VerticalAlignment="Top" Height="103" Width="206" Click="showbooksbutton_Click"/>
+        <Button x:Name="borrows_button" Content="Zwróć książkę" HorizontalAlignment="Left" Margin="484,252,0,0" VerticalAlignment="Top" Height="103" Width="206" Click="borrows_button_Click" />
+        <TextBox x:Name="getuserid" HorizontalAlignment="Left" Margin="368,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="234,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118"><Run Language="pl-pl" Text="Podaj swoje id" FontFamily="Comic Sans MS"/></TextBlock>
+        <Label Content="Witamy w bibliotece!" FontFamily="Comic Sans MS" FontSize="20" HorizontalAlignment="Left" Margin="299,34,0,0" VerticalAlignment="Top" Width="217" Height="68"/>
 
     </Grid>
 </Page>
